@@ -369,6 +369,12 @@ class vmmConfig(object):
         self.conf.set("/confirm/delete-storage", val)
 
 
+    # Window position remembering
+    def set_remember_window_position(self, val):
+        self.conf.set("/remember-window-position", val)
+    def get_remember_window_position(self):
+        return self.conf.get("/remember-window-position")
+
     # System tray visibility
     def on_view_system_tray_changed(self, cb):
         return self.conf.notify_add("/system-tray", cb)
@@ -612,6 +618,15 @@ class vmmConfig(object):
     def set_manager_window_size(self, w, h):
         self.conf.set("/manager-window-width", w)
         self.conf.set("/manager-window-height", h)
+
+    # Manager default window position
+    def get_manager_window_position(self):
+        x = self.conf.get("/manager-window-x")
+        y = self.conf.get("/manager-window-y")
+        return (x, y)
+    def set_manager_window_position(self, x, y):
+        self.conf.set("/manager-window-x", x)
+        self.conf.set("/manager-window-y", y)
 
     # URI autoconnect
     def get_conn_autoconnect(self, uri):

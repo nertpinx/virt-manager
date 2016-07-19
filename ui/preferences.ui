@@ -58,6 +58,22 @@
                             <property name="top_attach">0</property>
                           </packing>
                         </child>
+                        <child>
+                          <object class="GtkCheckButton" id="prefs-remember-window-position">
+                            <property name="label" translatable="yes">Remember manager _window position</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="use_underline">True</property>
+                            <property name="xalign">0.5</property>
+                            <property name="draw_indicator">True</property>
+                            <signal name="toggled" handler="on_prefs_remember_window_position_toggled" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="left_attach">0</property>
+                            <property name="top_attach">1</property>
+                          </packing>
+                        </child>
                       </object>
                     </child>
                   </object>

@@ -34,6 +34,7 @@ class vmmPreferences(vmmGObjectUI):
         self._init_ui()
 
         self.refresh_view_system_tray()
+        self.refresh_remember_window_position()
         self.refresh_update_interval()
         self.refresh_console_accels()
         self.refresh_console_scaling()
@@ -61,6 +62,7 @@ class vmmPreferences(vmmGObjectUI):
             "on_prefs_close_clicked": self.close,
 
             "on_prefs_system_tray_toggled" : self.change_view_system_tray,
+            "on_prefs_remember_window_position_toggled" : self.change_remember_window_position,
             "on_prefs_stats_update_interval_changed": self.change_update_interval,
             "on_prefs_console_accels_toggled": self.change_console_accels,
             "on_prefs_console_scaling_changed": self.change_console_scaling,
@@ -177,6 +179,9 @@ class vmmPreferences(vmmGObjectUI):
     def refresh_view_system_tray(self):
         val = self.config.get_view_system_tray()
         self.widget("prefs-system-tray").set_active(bool(val))
+    def refresh_remember_window_position(self):
+        val = self.config.get_remember_window_position()
+        self.widget("prefs-remember-window-position").set_active(bool(val))
 
     def refresh_update_interval(self):
         self.widget("prefs-stats-update-interval").set_value(
@@ -329,6 +334,8 @@ class vmmPreferences(vmmGObjectUI):
 
     def change_view_system_tray(self, src):
         self.config.set_view_system_tray(src.get_active())
+    def change_remember_window_position(self, src):
+        self.config.set_remember_window_position(src.get_active())
 
     def change_update_interval(self, src):
         self.config.set_stats_update_interval(src.get_value_as_int())

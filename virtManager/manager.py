@@ -118,7 +118,7 @@ class vmmManager(vmmGObjectUI):
 
         w, h = self.config.get_manager_window_size()
         self.topwin.set_default_size(w or 550, h or 550)
-        self.prev_position = None
+        self._window_position = self.config.get_manager_window_position()
         self._window_size = None
 
         self.vmmenu = vmmenu.VMActionMenu(self, self.current_vm)
@@ -196,14 +196,16 @@ class vmmManager(vmmGObjectUI):
 
     def show(self):
         vis = self.is_visible()
+
+        if (not vis and self._window_position and
+            self.config.get_remember_window_position()):
+            self.topwin.move(*self._window_position)
+
         self.topwin.present()
         if vis:
             return
 
         logging.debug("Showing manager")
-        if self.prev_position:
-            self.topwin.move(*self.prev_position)
-            self.prev_position = None
 
         self.emit("manager-opened")
 
@@ -212,7 +214,7 @@ class vmmManager(vmmGObjectUI):
             return
 
         logging.debug("Closing manager")
-        self.prev_position = self.topwin.get_position()
+        self._window_position = self.topwin.get_position()
         self.topwin.hide()
         self.emit("manager-closed")
 
@@ -236,6 +238,8 @@ class vmmManager(vmmGObjectUI):
 
         if self._window_size:
             self.config.set_manager_window_size(*self._window_size)
+        if self._window_position:
+            self.config.set_manager_window_position(*self._window_position)
 
 
     def is_visible(self):
@@ -462,6 +466,7 @@ class vmmManager(vmmGObjectUI):
         if not self.is_visible():
             return
         self._window_size = (event.width, event.height)
+        self._window_position = (event.x, event.y)
 
     def exit_app(self, src_ignore=None, src2_ignore=None):
         self.emit("action-exit-app")
