@@ -1,0 +1,96 @@
+<domain type='qemu'>
+  <name>instance-00000002</name>
+  <uuid>98f61066-0ed7-4edb-bf18-bb3f90f95829</uuid>
+  <metadata>
+    <nova:instance xmlns:nova="http://openstack.org/xmlns/libvirt/nova/1.0">
+      <nova:package version="18.0.0"/>
+      <nova:name>win2</nova:name>
+      <nova:creationTime>2018-05-18 11:32:59</nova:creationTime>
+      <nova:flavor name="m1.tiny">
+        <nova:memory>512</nova:memory>
+        <nova:disk>1</nova:disk>
+        <nova:swap>0</nova:swap>
+        <nova:ephemeral>0</nova:ephemeral>
+        <nova:vcpus>1</nova:vcpus>
+      </nova:flavor>
+      <nova:owner>
+        <nova:user uuid="7e9de21dfdcc42ada94314ac4aad7fd2">admin</nova:user>
+        <nova:project uuid="291c00f44585442990b99a1ffe0b6668">demo</nova:project>
+      </nova:owner>
+      <nova:root type="image" uuid="172f85bb-ebef-426c-89bb-4cf8f528c38d"/>
+    </nova:instance>
+  </metadata>
+  <memory unit='KiB'>524288</memory>
+  <currentMemory unit='KiB'>524288</currentMemory>
+  <vcpu placement='static'>1</vcpu>
+  <cputune>
+    <shares>1024</shares>
+  </cputune>
+  <sysinfo type='smbios'>
+    <system>
+      <entry name='manufacturer'>OpenStack Foundation</entry>
+      <entry name='product'>OpenStack Nova</entry>
+      <entry name='version'>18.0.0</entry>
+      <entry name='serial'>bfcce241-59c5-bc80-0817-2527fde3176a</entry>
+      <entry name='uuid'>98f61066-0ed7-4edb-bf18-bb3f90f95829</entry>
+      <entry name='family'>Virtual Machine</entry>
+    </system>
+  </sysinfo>
+  <os>
+    <type arch='x86_64' machine='pc-i440fx-2.10'>hvm</type>
+    <boot dev='hd'/>
+    <smbios mode='sysinfo'/>
+  </os>
+  <features>
+    <acpi/>
+    <apic/>
+    <hyperv>
+      <relaxed state='on'/>
+      <vapic state='on'/>
+      <spinlocks state='on' retries='8191'/>
+    </hyperv>
+  </features>
+  <cpu>
+    <topology sockets='1' cores='1' threads='1'/>
+  </cpu>
+  <clock offset='localtime'/>
+  <on_poweroff>destroy</on_poweroff>
+  <on_reboot>restart</on_reboot>
+  <on_crash>destroy</on_crash>
+  <devices>
+    <emulator>/usr/bin/qemu-system-x86_64</emulator>
+    <disk type='file' device='disk'>
+      <driver name='qemu' type='qcow2' cache='none'/>
+      <source file='/home/stack/src/cloud/data/nova/instances/98f61066-0ed7-4edb-bf18-bb3f90f95829/disk'/>
+      <target dev='vda' bus='virtio'/>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x03' function='0x0'/>
+    </disk>
+    <controller type='usb' index='0' model='piix3-uhci'>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x01' function='0x2'/>
+    </controller>
+    <controller type='pci' index='0' model='pci-root'/>
+    <interface type='bridge'>
+      <mac address='fa:16:3e:03:41:f4'/>
+      <source bridge='qbr71fdf130-d1'/>
+      <target dev='tap71fdf130-d1'/>
+      <model type='virtio'/>
+      <driver name='qemu'/>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x02' function='0x0'/>
+    </interface>
+    <serial type='pty'>
+      <log file='/home/stack/src/cloud/data/nova/instances/98f61066-0ed7-4edb-bf18-bb3f90f95829/console.log' append='off'/>
+      <target port='0'/>
+    </serial>
+    <console type='pty'>
+      <log file='/home/stack/src/cloud/data/nova/instances/98f61066-0ed7-4edb-bf18-bb3f90f95829/console.log' append='off'/>
+      <target type='serial' port='0'/>
+    </console>
+    <input type='mouse' bus='ps2'/>
+    <input type='keyboard' bus='ps2'/>
+    <memballoon model='virtio'>
+      <stats period='10'/>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x04' function='0x0'/>
+    </memballoon>
+  </devices>
+</domain>
+
